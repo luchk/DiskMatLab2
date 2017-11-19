@@ -1,50 +1,47 @@
+#include <stdio.h>
 #include <iostream>
-#define SIZE 5
 
-using namespace std;
-
-void fill(int massive[]){
-    for(int i=0;i<SIZE;i++){
-        cout<<"["<<i+1<<"]:";
-        cin>> massive[i];
-    }
+void swap(char *s, int i, int j)
+{
+   int t = s[j];
+    s[j] = s[i];
+    s[i] = t;
 }
 
-void fill_out(int massive[]){
-    for(int i=0;i<SIZE;i++){
-        cout<<massive[i]<<" ";
-    }
-}
 
-void bubbleSort(int massive[]){
-    for(int i=0;i<SIZE-1;i++){
-        for(int j=0;j<SIZE;j++){
-            if(massive[j]>massive[j+1])
-                swap(massive[j],massive[j+1]);
+int main()
+{   int N;
+    std::cin >> N;
+    char s[N+1], t;
+    int i, j, r, k;
+
+
+    for(i=0; i<N; i++)
+    {
+        s[i] = '1'+i;
+    }
+    s[N] = '\0';
+
+    while(true)
+    {
+        printf("%s\n", s);
+        // Находим самое правое место, где s[i] < s[i+1]
+        for(i=N-1; i>=0 && s[i] > s[i+1]; i--) {
 
         }
+        // Находим s[j] - наименьший элемент справа от s[i] и больший его
+        for(j=N-1; s[i] > s[j]; j--) ;
+        // Меняем s[i] <-> s[j]
+
+        swap(s, i, j);
+        // То, что за "i" - переворачиваем
+        for(k=i+1, r=N-1; r > k; k++, r--)
+        {
+            swap(s, r, k);
+        }
+        if (i<0)
+        {
+            break; // Уже получили "654321" - самую старшую перестановку
+        }
     }
-}
-
-void output(int massive[]){
-    for(int i=0;i<SIZE;i++){
-        cout<<massive[i]<<" ";
-    }
-}
-
-int main() {
-
-    int n,massive[SIZE];
-
-    cout<<"Fill the massive:"<<endl;
-    fill(massive);
-    cout<<"Our massive is: ";
-    fill_out(massive);
-    cout<<"\nThe sorted massive is: ";
-    bubbleSort(massive);
-    output(massive);
-
-
-
-    return 0;
 }
