@@ -9,6 +9,7 @@ void swap(char *s, int i, int j)
 }
 
 
+
 int main()
 {   int N;
     std::cin >> N;
